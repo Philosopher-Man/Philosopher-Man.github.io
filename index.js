@@ -11,13 +11,12 @@ function canUseHistory() {
 }
 
 function activate(id) {
-  panels.forEach(p => p.classList.toggle('active', p.id === id));
-  links.forEach(a => a.classList.toggle('active', a.dataset.nav === id));
+  const target = panels.find(p => p.id === id) ? id : 'overview';
+  panels.forEach(p => p.classList.toggle('active', p.id === target));
+  links.forEach(a => a.classList.toggle('active', a.dataset.nav === target));
 
   if (canUseHistory()) {
-    try {
-      history.replaceState(null, '', '#' + id);
-    } catch (e) {}
+    try { history.replaceState(null, '', '#' + target); } catch (e) {}
   }
 }
 
@@ -36,7 +35,7 @@ window.addEventListener('load', () => {
 const mini = document.querySelector('header.min .nav');
 if (mini) {
   mini.innerHTML = nav.innerHTML;
-  Array.from(mini.querySelectorAll('a')).forEach(a => 
+  Array.from(mini.querySelectorAll('a')).forEach(a =>
     a.addEventListener('click', e => {
       e.preventDefault();
       activate(a.dataset.nav);
@@ -49,29 +48,20 @@ if (hire) {
   hire.addEventListener('click', () => activate('contact'));
 }
 
-const go = document.getElementById('go-services');
-if (go) {
-  go.addEventListener('click', () => activate('overview'));
-}
-
 const gop = document.getElementById('go-projects');
 if (gop) {
-  gop.addEventListener('click', () => {
-    activate('projects')
-  });
+  gop.addEventListener('click', () => activate('projects'));
 }
 
 const gosk = document.getElementById('go-skills');
 if (gosk) {
-  gosk.addEventListener('click', () => {
-    activate('skills')
-  });
+  gosk.addEventListener('click', () => activate('skills'));
 }
 
 const skillCloud = document.getElementById('skillCloud');
-const skillPanels = document.getElementById('skillPanels').querySelectorAll('.card');
+const skillPanels = document.getElementById('skillPanels')?.querySelectorAll('.card');
 
-if (skillCloud) {
+if (skillCloud && skillPanels) {
   skillCloud.addEventListener('click', e => {
     const t = e.target.closest('.skill');
     if (!t) return;
