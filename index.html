@@ -1,599 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oscar Escalante — Junior Web Pentester / AppSec</title>
 
-  <!-- SEO -->
-  <title>Oscar Escalante — Ethical Hacker · Web Pentesting &amp; AppSec</title>
-  <meta name="description" content="Oscar Escalante, Ethical Hacker at NTT DATA. Web pentester focused on business logic, broken access control (IDOR), XSS, API security and clear reporting. eJPTv2 certified; HTB CWES and BSCP in progress.">
-  <link rel="canonical" href="https://philosopher-man.github.io/">
-  <meta name="theme-color" content="#0a0d12">
-  <meta name="robots" content="index, follow">
+<meta name="description" content="Oscar Escalante — Junior Web Penetration Tester / Entry-Level AppSec. Focused on Broken Access Control (IDOR), XSS, authentication/session testing, API testing with Burp Suite, and clear reporting." />
+<meta property="og:title" content="Oscar Escalante — Junior Web Pentester / AppSec" />
+<meta property="og:description" content="Web pentesting & AppSec portfolio: IDOR, XSS, auth/session testing, API testing, fuzzing/content discovery, and reproducible reporting." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://philosopher-man.github.io/">
-  <meta property="og:site_name" content="Oscar Escalante">
-  <meta property="og:title" content="Oscar Escalante — Ethical Hacker · Web Pentesting &amp; AppSec">
-  <meta property="og:description" content="Ethical Hacker at NTT DATA. Business logic, IDOR, XSS, API security and reporting that both engineers and executives can act on.">
-  <!-- TODO: sube una imagen 1200x630 en /assets/og-cover.png (puede ser un render simple del hero) -->
-  <meta property="og:image" content="https://philosopher-man.github.io/assets/og-cover.png">
-  <meta property="og:locale" content="en_US">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Oscar Escalante — Ethical Hacker · Web Pentesting &amp; AppSec">
-  <meta name="twitter:description" content="Ethical Hacker at NTT DATA. Business logic, IDOR, XSS, API security and clear reporting.">
-  <meta name="twitter:image" content="https://philosopher-man.github.io/assets/og-cover.png">
-
-  <!-- Favicon SVG embebido: cero peticiones extra -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0d12'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='26' fill='%233fe0c8' text-anchor='middle'%3Eoe_%3C/text%3E%3C/svg%3E">
-
-  <!-- Tipografías -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- JSON-LD: Person schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Oscar Escalante",
-    "url": "https://philosopher-man.github.io/",
-    "jobTitle": "Ethical Hacker",
-    "worksFor": { "@type": "Organization", "name": "NTT DATA" },
-    "knowsAbout": ["Web Penetration Testing","Application Security","OWASP Top 10","Burp Suite","IDOR","XSS","API Security","Business Logic Vulnerabilities"],
-    "sameAs": ["https://github.com/Philosopher-Man"]
-  }
-  </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
-
-<header class="site-header">
-  <nav class="nav container" aria-label="Primary">
-    <a class="brand" href="#top" aria-label="Oscar Escalante — home">oe<span class="brand-caret" aria-hidden="true">_</span></a>
-
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
-
-    <ul id="nav-menu" class="nav-menu">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#track">Track</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <!-- TODO: sube tu CV a /assets/Oscar-Escalante-CV.pdf -->
-      <li><a class="nav-cv" href="assets/Oscar-Escalante-CV.pdf" download>CV ↓</a></li>
-    </ul>
-  </nav>
+<header class="min">
+  <div class="brand">
+    <div class="avatar"><img src="assets/logo-mark.png" alt="" onerror="this.style.display='none'"></div>
+    <div class="title">
+      <h1>Oscar Escalante</h1>
+      <span>Junior Web Pentester / AppSec</span>
+    </div>
+  </div>
+  <div class="nav mini"></div>
 </header>
 
-<main id="main">
-
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="top" aria-label="Introduction">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">// web pentesting · application security</p>
+<div class="container">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="avatar"><img src="assets/logo-mark.png" alt="" onerror="this.style.display='none'"></div>
+      <div class="title">
         <h1>Oscar Escalante</h1>
-        <p class="hero-role">Ethical Hacker <span class="dim">@</span> <strong>NTT DATA</strong>
-          <span class="hero-since mono">since feb 2026</span></p>
-        <p class="hero-lede">
-          I break web applications before someone worse does. Junior web pentester focused on
-          <em>business logic</em>, <em>access control</em> and <em>API abuse</em> — manual-first,
-          Burp-driven, and always shipped as a report people can actually act on.
-        </p>
-
-        <ul class="hero-badges mono" aria-label="Certifications">
-          <li class="chip">eJPTv2</li>
-          <li class="chip chip--amber">HTB CWES · in progress</li>
-          <li class="chip chip--amber">BSCP · in progress</li>
-        </ul>
-
-        <div class="hero-ctas">
-          <a class="btn btn-primary" href="assets/Oscar-Escalante-CV.pdf" download>Download CV</a>
-          <a class="btn btn-ghost" href="https://github.com/Philosopher-Man" target="_blank" rel="noopener">GitHub ↗</a>
-          <a class="btn btn-ghost" href="#contact">Contact</a>
-        </div>
-
-        <p class="legal-note">
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.5v5.2c0 4.6-3 8-7 10.3-4-2.3-7-5.7-7-10.3V5.5z"/><path d="m9 11.5 2.2 2.2 4.3-4.2"/></svg>
-          All testing shown on this site was performed in authorized, controlled environments (labs &amp; sanctioned engagements).
-        </p>
-      </div>
-
-      <!-- Signature: panel interactivo estilo Burp Repeater -->
-      <div class="hero-panel brackets">
-        <div class="repeater">
-          <div class="rep-head">
-            <span class="rep-title mono">Repeater — oscar.escalante</span>
-            <span class="rep-lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          </div>
-          <div class="rep-tabs mono" role="tablist" aria-label="Panel views">
-            <button role="tab" id="tab-whoami" aria-selected="true"  tabindex="0"  data-view="whoami">whoami</button>
-            <button role="tab" id="tab-focus"   aria-selected="false" tabindex="-1" data-view="focus">focus</button>
-            <button role="tab" id="tab-stack"   aria-selected="false" tabindex="-1" data-view="stack">stack</button>
-            <button role="tab" id="tab-contact" aria-selected="false" tabindex="-1" data-view="contact">contact</button>
-          </div>
-          <pre class="rep-request mono" id="rep-req" aria-hidden="true"></pre>
-          <pre class="rep-response mono" aria-live="polite"><code id="rep-out"></code><span class="caret" aria-hidden="true"></span></pre>
-          <div class="rep-status mono"><span class="rep-dot" aria-hidden="true"></span><span id="rep-status">200 OK</span></div>
-        </div>
+        <span>Junior Web Pentester • Entry-Level AppSec</span>
       </div>
     </div>
-  </section>
 
-  <!-- ============ 01 OVERVIEW ============ -->
-  <section class="section" id="about">
-    <div class="container">
-      <header class="sec-head reveal">
-        <span class="sec-index mono" aria-hidden="true">01</span>
+    <div class="kpis">
+      <div class="kpi"><b>Top 5%</b><i>TryHackMe</i></div>
+      <div class="kpi"><b>100+</b><i>Labs solved</i></div>
+      <div class="kpi"><b>eJPTv2</b><i>Certified</i></div>
+      <div class="kpi"><b>CWES</b><i>In progress</i></div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <a href="#overview" data-nav="overview">Overview</a>
+      <a href="#experience" data-nav="experience">Experience</a>
+      <a href="#skills" data-nav="skills">Skills</a>
+      <a href="#certs" data-nav="certs">Certifications</a>
+      <a href="#projects" data-nav="projects">Projects</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+      <a href="#downloads" data-nav="downloads">Downloads</a>
+    </nav>
+
+    <div class="ctas">
+      <a class="btn" href="mailto:oscardavidescalante2019@gmail.com">Email</a>
+      <a class="btn" id="hire">Contact</a>
+    </div>
+
+    <div class="footer">
+      <a href="https://github.com/Philosopher-Man" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="http://www.linkedin.com/in/oscarescalantecam" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://tryhackme.com/r/p/PhilosopherMan08" target="_blank" rel="noopener">TryHackMe</a>
+    </div>
+  </aside>
+
+  <section class="content">
+    <div class="panels">
+
+      <!-- OVERVIEW -->
+      <section class="panel active" id="overview">
         <h2>Overview</h2>
-        <span class="sec-line" aria-hidden="true"></span>
-      </header>
+        <p class="lead">
+          Entry-level security professional focused on web application penetration testing and AppSec fundamentals.
+          Strong in <b>Broken Access Control (IDOR)</b>, <b>XSS</b>, and <b>authentication/session testing</b> using Burp Suite.
+        </p>
 
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p>
-            I'm an entry-level web pentester who learned by doing: labs, certifications and hundreds
-            of hours inside Burp Suite. My sweet spot is the intersection of <strong>logic and
-            security</strong> — the requests the app never expected. An IDOR that leaks another
-            tenant's data. A session that survives logout. A price field that trusts the client.
-          </p>
-          <p>
-            Since <strong>February 2026</strong> I work as an <strong>Ethical Hacker at NTT DATA</strong>,
-            testing web applications and APIs and turning findings into reports that engineers can
-            reproduce and executives can prioritize. I document everything — my methodology notes and
-            tooling live on GitHub.
-          </p>
-        </div>
+        <div class="hero">
+          <div class="big">
+            <h2>What I bring</h2>
 
-        <aside class="quick-facts reveal" aria-label="Quick facts">
-          <h3 class="mono">quick_facts</h3>
-          <dl>
-            <div><dt>Role</dt><dd>Ethical Hacker · NTT DATA</dd></div>
-            <div><dt>Since</dt><dd>Feb 2026</dd></div>
-            <div><dt>Focus</dt><dd>Web &amp; API security</dd></div>
-            <div><dt>Certs</dt><dd>eJPTv2 · CWES* · BSCP*</dd></div>
-            <div><dt>Degree</dt><dd>B.S. Systems Eng. — 2027</dd></div>
-            <div><dt>Method</dt><dd>Manual-first, Burp-driven</dd></div>
-          </dl>
-          <p class="mono fact-note">* = in progress</p>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 02 SKILLS / WHAT I BRING ============ -->
-  <section class="section" id="skills">
-    <div class="container">
-      <header class="sec-head reveal">
-        <span class="sec-index mono" aria-hidden="true">02</span>
-        <h2>What I bring</h2>
-        <span class="sec-line" aria-hidden="true"></span>
-      </header>
-
-      <ul class="cap-grid">
-        <!-- Destacada: business logic, prioridad actual -->
-        <li class="cap-card cap-card--wide reveal">
-          <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.6 7.7 10.4 16M17.4 7.7 13.6 16M7.2 6h9.6"/></svg></span>
-          <div class="cap-body">
-            <div class="cap-title">
-              <h3>Business Logic Flaws</h3>
-              <span class="chip chip--teal mono">current focus</span>
+            <div class="badges" style="margin:8px 0 12px 0">
+              <span class="badge">IDOR / Access Control</span>
+              <span class="badge">XSS</span>
+              <span class="badge">Auth & Session Testing</span>
+              <span class="badge">API Testing</span>
+              <span class="badge">Burp Suite</span>
+              <span class="badge">Fuzzing & Discovery</span>
+              <span class="badge">Reporting</span>
             </div>
-            <p>
-              Finding the abuse cases the spec never covered: price and quantity tampering, workflow
-              bypasses, negative values, race conditions, over-trust in client-side checks.
-              Automated scanners can't see these — a human reading the request flow can.
-            </p>
-            <ul class="mono chips"><li>price tampering</li><li>workflow abuse</li><li>race conditions</li><li>client-side trust</li></ul>
-          </div>
-        </li>
 
-        <li class="cap-card reveal">
-          <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.8 16c.6-1.6 1.6-2.3 2.7-2.3s2.1.7 2.7 2.3M14 9.5h5M14 13h3.5"/></svg></span>
-          <div class="cap-body">
-            <h3>Access Control &amp; IDOR</h3>
-            <p>Object-level authorization is my default first stop: swapping IDs, GUIDs and roles across every endpoint until the app proves it checks ownership — not just authentication.</p>
-            <ul class="mono chips"><li>IDOR</li><li>BOLA</li><li>forced browsing</li></ul>
-          </div>
-        </li>
+            <div class="grid cols-2">
+              <div class="card">
+                <h3>Strengths</h3>
+                <div class="hl"><b>Web exploitation</b><span>hands-on validation in labs/CTFs</span></div>
+                <div class="hl"><b>Burp workflows</b><span>Proxy / Repeater / Intruder</span></div>
+                <div class="hl"><b>Clear reporting</b><span>repro steps, impact, remediation</span></div>
+              </div>
 
-        <li class="cap-card reveal">
-          <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 5l-3 14"/></svg></span>
-          <div class="cap-body">
-            <h3>XSS &amp; Injection</h3>
-            <p>Reflected, stored and DOM-based XSS, plus the classic injection family — tested manually and confirmed with proof-of-concept payloads, never just scanner output.</p>
-            <ul class="mono chips"><li>reflected</li><li>stored</li><li>DOM</li><li>context-aware</li></ul>
-          </div>
-        </li>
+              <div class="card">
+                <h3>Current track</h3>
+                <div class="hl">eJPTv2 certified (Oct 2025)</div>
+                <div class="hl">CWES — Web Penetration Tester Path (HTB)</div>
+                <div class="hl">BSCP — Burp Suite certification (PortSwigger)</div>
+              </div>
+            </div>
 
-        <li class="cap-card reveal">
-          <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="3.5"/><path d="m11 13 8-8M16.5 5.5 19 8M14 7l2 2"/></svg></span>
-          <div class="cap-body">
-            <h3>Authentication &amp; Sessions</h3>
-            <p>Login flows, password reset, token handling, session fixation and logout behaviour — the lifecycle where most real bugs hide.</p>
-            <ul class="mono chips"><li>session handling</li><li>JWT</li><li>reset flows</li></ul>
-          </div>
-        </li>
-
-        <li class="cap-card reveal">
-          <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4c-2 0-2.5 1.2-2.5 2.5 0 1.2.2 2.4-1.5 3.5 1.7 1.1 1.5 2.3 1.5 3.5C6.5 17 7 18 9 18"/><path d="M15 4c2 0 2.5 1.2 2.5 2.5 0 1.2-.2 2.4 1.5 3.5-1.7 1.1-1.5 2.3-1.5 3.5 0 1.5-.5 2.5-2.5 2.5"/><circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/></svg></span>
-          <div class="cap-body">
-            <h3>API Testing</h3>
-            <p>REST endpoints mapped and abused in Repeater: mass assignment, parameter pollution, versioning leaks and authorization gaps between roles.</p>
-            <ul class="mono chips"><li>REST</li><li>mass assignment</li><li>BOLA</li></ul>
-          </div>
-        </li>
-
-        <li class="cap-card reveal">
-          <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></span>
-          <div class="cap-body">
-            <h3>Advanced Burp Suite</h3>
-            <p>Burp is home base: Repeater workflows, Intruder attack types, match &amp; replace, scoping, and extensions (Autorize, Param Miner, JWT Editor) that scale manual testing.</p>
-            <ul class="mono chips"><li>Repeater</li><li>Intruder</li><li>Autorize</li><li>extensions</li></ul>
-          </div>
-        </li>
-
-        <li class="cap-card reveal">
-          <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M12.5 15H17"/></svg></span>
-          <div class="cap-body">
-            <h3>Fuzzing &amp; Automation</h3>
-            <p>Custom wordlists and small Python/Bash scripts to discover hidden endpoints and parameters — automation that feeds manual testing, not replaces it.</p>
-            <ul class="mono chips"><li>ffuf</li><li>Python</li><li>Bash</li><li>wordlists</li></ul>
-          </div>
-        </li>
-
-        <li class="cap-card cap-card--wide cap-report reveal">
-          <span class="cap-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 15.5h6M9 8.5h2"/></svg></span>
-          <div class="cap-body">
-            <h3>Reporting — technical &amp; executive</h3>
-            <p>Every finding ships with reproduction steps, evidence, risk rating and business impact.</p>
-            <div class="cap-split">
-              <div><h4 class="mono">for_engineers</h4><p>PoC payloads, HTTP/curl reproduction, CVSS scoring, concrete remediation guidance.</p></div>
-              <div><h4 class="mono">for_management</h4><p>Plain-language impact, prioritized risk, an executive summary readable in two minutes.</p></div>
+            <div class="cta">
+              <a class="btn primary" id="go-skills">View skills</a>
+              <a class="btn" id="go-projects" data-nav="projects">See work</a>
             </div>
           </div>
-        </li>
-      </ul>
 
-      <!-- Toolkit en chips -->
-      <div class="skills-block reveal">
-        <h3 class="mono skills-title">toolkit</h3>
-        <div class="skill-groups">
-          <div class="skill-group">
-            <h4 class="mono">appsec</h4>
-            <ul class="chips mono"><li>OWASP Top 10</li><li>business logic</li><li>IDOR / BOLA</li><li>XSS</li><li>auth &amp; sessions</li></ul>
-          </div>
-          <div class="skill-group">
-            <h4 class="mono">apis</h4>
-            <ul class="chips mono"><li>REST</li><li>API fuzzing</li><li>authorization matrices</li></ul>
-          </div>
-          <div class="skill-group">
-            <h4 class="mono">tools</h4>
-            <ul class="chips mono"><li>Burp Suite</li><li>ffuf</li><li>Nmap</li><li>dirsearch</li><li>sqlmap</li><li>wfuzz</li></ul>
-          </div>
-          <div class="skill-group">
-            <h4 class="mono">automation</h4>
-            <ul class="chips mono"><li>Python</li><li>Bash</li><li>Git</li><li>scripting</li></ul>
-          </div>
-          <div class="skill-group">
-            <h4 class="mono">systems</h4>
-            <ul class="chips mono"><li>Linux</li><li>Windows</li><li>networking basics</li></ul>
-          </div>
-          <div class="skill-group">
-            <h4 class="mono">reporting</h4>
-            <ul class="chips mono"><li>CVSS</li><li>technical writing</li><li>executive summaries</li></ul>
+          <div class="media">
+            <img src="assets/photo1.png" alt="" loading="lazy" onerror="this.style.display='none'">
+            <div class="overlay"></div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ============ 03 EXPERIENCE ============ -->
-  <section class="section" id="experience">
-    <div class="container">
-      <header class="sec-head reveal">
-        <span class="sec-index mono" aria-hidden="true">03</span>
+        <div class="grid cols-3" style="margin-top:16px">
+          <div class="card">
+            <h3>Services</h3>
+            <div class="kv">
+              <div><b>Web App Testing</b></div>
+              <div>OWASP-aligned testing: access control (IDOR), XSS, auth/session, API testing, fuzzing & content discovery.</div>
+
+              <div><b>AppSec Support</b></div>
+              <div>Re-testing fixes, writing remediation notes, security checklists for developers (entry-level).</div>
+
+              <div><b>Reporting</b></div>
+              <div>Clear PoCs with reproducible steps, impact, and practical remediation.</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>CWES focus (high-level)</h3>
+            <table class="table">
+              <tr><th>Area</th><th>What I practice</th></tr>
+              <tr><td>Access control</td><td>IDOR, horizontal/vertical authorization checks</td></tr>
+              <tr><td>Auth/session</td><td>role checks, token/session handling, bypass scenarios</td></tr>
+              <tr><td>XSS</td><td>validation + mitigation (encoding, CSP basics)</td></tr>
+              <tr><td>APIs</td><td>endpoint testing with Burp Repeater/Intruder</td></tr>
+              <tr><td>Discovery</td><td>fuzzing, directories, parameters, recon dorks</td></tr>
+            </table>
+          </div>
+
+          <div class="card">
+            <h3>Quick Links</h3>
+            <div class="kv">
+              <div><b>GitHub</b></div>
+              <div><a href="https://github.com/Philosopher-Man" target="_blank" rel="noopener">github.com/Philosopher-Man</a></div>
+
+              <div><b>LinkedIn</b></div>
+              <div><a href="http://www.linkedin.com/in/oscarescalantecam" target="_blank" rel="noopener">linkedin.com/in/oscarescalantecam</a></div>
+
+              <div><b>TryHackMe</b></div>
+              <div><a href="https://tryhackme.com/r/p/PhilosopherMan08" target="_blank" rel="noopener">tryhackme.com/r/p/PhilosopherMan08</a></div>
+
+              <div><b>Website</b></div>
+              <div><a href="https://philosopher-man.github.io/" target="_blank" rel="noopener">philosopher-man.github.io</a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="panel" id="experience">
         <h2>Experience</h2>
-        <span class="sec-line" aria-hidden="true"></span>
-      </header>
+        <p class="lead">Hands-on roles and reproducible practice in labs/CTFs.</p>
 
-      <ol class="timeline">
-        <li class="tl-item tl-item--now reveal">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-card">
-            <div class="tl-meta mono">
-              <span class="chip chip--teal">Current</span>
-              <time>feb 2026 — present</time>
+        <div class="timeline">
+          <div class="row">
+            <div class="when">Feb 2024 – Feb 2025</div>
+            <div class="what">
+              <h4>Cybersecurity Analyst • EA Piscinas Pro</h4>
+              <div class="meta">Bogotá, Colombia</div>
+              <ul>
+                <li>Supported security hardening and service exposure reviews, strengthening access controls and authentication practices.</li>
+                <li>Ran internal phishing simulations for awareness measurement and delivered actionable remediation guidance.</li>
+                <li>Performed basic traffic checks with Wireshark and service enumeration with Nmap to support visibility and troubleshooting.</li>
+                <li>Delivered concise findings and remediation notes in a stakeholder-friendly format.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Reporting</span><span class="tag">Awareness</span><span class="tag">Hardening</span><span class="tag">Recon</span>
+              </div>
             </div>
-            <h3>Ethical Hacker · NTT DATA</h3>
-            <ul class="tl-list">
-              <li>Web application and API security testing for enterprise clients — manual-first, with advanced Burp Suite workflows.</li>
-              <li>Hunting business logic flaws, broken access control (IDOR), XSS and authentication/session weaknesses across OWASP Top 10 categories.</li>
-              <li>Supporting AppSec initiatives: vulnerability triage, remediation guidance and retesting.</li>
-              <li>Delivering reports for both technical and executive audiences.</li>
-            </ul>
-            <ul class="mono chips"><li>web pentesting</li><li>API testing</li><li>business logic</li><li>reporting</li></ul>
           </div>
-        </li>
 
-        <li class="tl-item reveal">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-card">
-            <div class="tl-meta mono"><time>feb 2024 — feb 2025</time></div>
-            <h3>Cybersecurity Analyst · EA Piscinas Pro</h3>
-            <ul class="tl-list">
-              <li>Monitoring, vulnerability management and secure configuration of web-facing systems.</li>
-              <li>First hands-on exposure to attack surface management and incident response basics.</li>
-            </ul>
+          <div class="row">
+            <div class="when">Jan 2023 – Present</div>
+            <div class="what">
+              <h4>Self-Directed Web Pentesting / AppSec Training • Labs & CTF</h4>
+              <div class="meta">TryHackMe, Hack The Box Academy</div>
+              <ul>
+                <li>Validated Broken Access Control (IDOR) and auth/session logic flaws in controlled web apps using Burp Suite.</li>
+                <li>Tested and documented XSS scenarios (reflected/stored in labs) with remediation notes (encoding, CSP basics).</li>
+                <li>Practiced API testing and attack surface expansion using content discovery and fuzzing (FFUF/Gobuster).</li>
+                <li>Built small Python/Bash helpers to streamline recon and fuzzing workflows.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">IDOR</span><span class="tag">XSS</span><span class="tag">Auth/Session</span><span class="tag">Burp</span>
+              </div>
+            </div>
           </div>
-        </li>
-
-        <li class="tl-item reveal">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-card">
-            <div class="tl-meta mono"><time>jan 2023 — present</time></div>
-            <h3>Self-Directed Web Pentesting / AppSec Training</h3>
-            <ul class="tl-list">
-              <li>Structured path through PortSwigger Web Security Academy, TryHackMe, HackTheBox and Hack4U labs.</li>
-              <li>Methodology notes, lab write-ups and tooling published on GitHub.</li>
-            </ul>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ 04 TRACK (CERTS + EDUCATION) ============ -->
-  <section class="section" id="track">
-    <div class="container">
-      <header class="sec-head reveal">
-        <span class="sec-index mono" aria-hidden="true">04</span>
-        <h2>Training track</h2>
-        <span class="sec-line" aria-hidden="true"></span>
-      </header>
-
-      <div class="track-legend mono reveal" aria-hidden="true">
-        <span><i class="dot dot--ok"></i> earned</span>
-        <span><i class="dot dot--prog"></i> in progress</span>
-      </div>
-
-      <ol class="timeline">
-        <li class="tl-item reveal">
-          <span class="tl-dot tl-dot--prog" aria-hidden="true"></span>
-          <div class="tl-card">
-            <div class="tl-meta mono"><span class="chip chip--amber">In progress</span><time>2026</time></div>
-            <h3>BSCP — Burp Suite Certified Practitioner</h3>
-            <p>PortSwigger · fully hands-on exam: exploit real vulnerabilities across a scoped target using Burp Suite.</p>
-          </div>
-        </li>
-
-        <li class="tl-item reveal">
-          <span class="tl-dot tl-dot--prog" aria-hidden="true"></span>
-          <div class="tl-card">
-            <div class="tl-meta mono"><span class="chip chip--amber">In progress</span><time>2026</time></div>
-            <h3>CWES — Certified Web Exploitation Specialist</h3>
-            <p>Hack The Box · advanced web exploitation: from injection to complex chained attacks.</p>
-          </div>
-        </li>
-
-        <li class="tl-item reveal">
-          <span class="tl-dot tl-dot--ok" aria-hidden="true"></span>
-          <div class="tl-card">
-            <div class="tl-meta mono"><span class="chip chip--teal">Earned</span><time>oct 2025</time></div>
-            <h3>eJPTv2 — Junior Penetration Tester</h3>
-            <p>INE Security · practical exam covering network and web pentesting fundamentals.</p>
-          </div>
-        </li>
-
-        <li class="tl-item reveal">
-          <span class="tl-dot tl-dot--ok" aria-hidden="true"></span>
-          <div class="tl-card">
-            <div class="tl-meta mono"><span class="chip chip--teal">Earned</span><time>2023 — 2025</time></div>
-            <h3>Platform training — TryHackMe · Hack4U · Udemy</h3>
-            <p>Web fundamentals, ethical hacking bootcamps and applied web-hacking course tracks.</p>
-          </div>
-        </li>
-
-        <li class="tl-item reveal">
-          <span class="tl-dot tl-dot--ok" aria-hidden="true"></span>
-          <div class="tl-card">
-            <div class="tl-meta mono"><span class="chip">Education</span><time>expected jun 2027</time></div>
-            <h3>B.S. Systems Engineering</h3>
-            <p>Virtual program — networking, operating systems and software engineering fundamentals.</p>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ 05 CASE STUDIES ============ -->
-  <section class="section" id="cases">
-    <div class="container">
-      <header class="sec-head reveal">
-        <span class="sec-index mono" aria-hidden="true">05</span>
-        <h2>Case studies</h2>
-        <span class="sec-line" aria-hidden="true"></span>
-      </header>
-
-      <details class="case reveal">
-        <summary>
-          <span class="case-num mono">CS-01</span>
-          <span class="case-title">Broken Access Control — IDOR</span>
-          <span class="chip chip--teal mono">lab</span>
-          <svg class="case-chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-        </summary>
-        <div class="case-body">
-          <div class="case-grid">
-            <section><h4 class="mono">objective</h4><p>Prove that object-level authorization was missing on a multi-user application.</p></section>
-            <section><h4 class="mono">approach</h4><p>Mapped every endpoint referencing identifiers; created two test accounts; replayed requests in Repeater swapping IDs; used Autorize to detect missing server-side ownership checks.</p></section>
-            <section><h4 class="mono">finding</h4><p><code>GET /api/orders/{id}</code> returned other users' order data with a <code>200</code> — the server authenticated the request but never verified ownership.</p></section>
-            <section><h4 class="mono">impact</h4><p>Full horizontal privilege escalation: any authenticated user could read any other user's orders and personal data.</p></section>
-            <section><h4 class="mono">remediation</h4><p>Server-side ownership check on every object access, non-guessable identifiers where feasible, and access-control regression tests in CI.</p></section>
-          </div>
-          <p class="case-note mono">Performed in a controlled lab environment — no production systems touched.</p>
         </div>
-      </details>
 
-      <details class="case reveal">
-        <summary>
-          <span class="case-num mono">CS-02</span>
-          <span class="case-title">Authentication &amp; Session Weaknesses</span>
-          <span class="chip chip--teal mono">lab</span>
-          <svg class="case-chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
-        </summary>
-        <div class="case-body">
-          <div class="case-grid">
-            <section><h4 class="mono">objective</h4><p>Audit the complete session lifecycle: login, reset, storage and logout.</p></section>
-            <section><h4 class="mono">approach</h4><p>Tested brute-force protection, analyzed reset-token entropy, inspected cookie flags, and verified server-side invalidation after logout in Burp.</p></section>
-            <section><h4 class="mono">finding</h4><p>Reset tokens were predictable; sessions were not invalidated server-side after logout; cookies lacked <code>Secure</code>/<code>HttpOnly</code> on some paths.</p></section>
-            <section><h4 class="mono">impact</h4><p>Realistic account-takeover paths: a leaked or reused token stayed valid indefinitely.</p></section>
-            <section><h4 class="mono">remediation</h4><p>Cryptographically random reset tokens, server-side session revocation, cookie hardening, and rate limiting on sensitive flows.</p></section>
+        <div class="grid cols-2" style="margin-top:14px">
+          <div class="card">
+            <h3>Case Study: Broken Access Control (IDOR)</h3>
+            <p>
+              Demonstrated unauthorized access to other users’ objects by manipulating identifiers in requests.
+              Documented PoC steps, impact, and recommended server-side authorization checks.
+            </p>
+            <div class="tags"><span class="tag">OWASP</span><span class="tag">Access control</span><span class="tag">API</span><span class="tag">Burp</span></div>
           </div>
-          <p class="case-note mono">Performed in a controlled lab environment — no production systems touched.</p>
+
+          <div class="card">
+            <h3>Case Study: Auth / Session Testing</h3>
+            <p>
+              Tested role checks and token/session handling in controlled apps, demonstrated bypass scenarios,
+              and proposed fixes: server-side authorization + secure session management.
+            </p>
+            <div class="tags"><span class="tag">Auth flaws</span><span class="tag">Session</span><span class="tag">Logic</span><span class="tag">Remediation</span></div>
+          </div>
         </div>
-      </details>
-    </div>
-  </section>
+      </section>
 
-  <!-- ============ 06 CWES FOCUS ============ -->
-  <section class="section" id="focus">
-    <div class="container">
-      <header class="sec-head reveal">
-        <span class="sec-index mono" aria-hidden="true">06</span>
-        <h2>CWES focus areas</h2>
-        <span class="sec-line" aria-hidden="true"></span>
-      </header>
+      <!-- SKILLS -->
+      <section class="panel" id="skills">
+        <h2>Skills</h2>
+        <p class="lead">Tap to filter focus areas.</p>
 
-      <ul class="focus-list">
-        <li class="reveal">
-          <span class="focus-rank mono" aria-hidden="true">F-01</span>
-          <div class="focus-main"><h3>Access control &amp; IDOR</h3><p>Every lab and engagement starts here — the highest-yield bug class I test for.</p></div>
-          <span class="chip chip--teal mono">primary focus</span>
-        </li>
-        <li class="reveal">
-          <span class="focus-rank mono" aria-hidden="true">F-02</span>
-          <div class="focus-main"><h3>Authentication &amp; sessions</h3><p>Lifecycle-level testing: reset, fixation, invalidation, token handling.</p></div>
-          <span class="chip chip--teal mono">primary focus</span>
-        </li>
-        <li class="reveal">
-          <span class="focus-rank mono" aria-hidden="true">F-03</span>
-          <div class="focus-main"><h3>Cross-site scripting (XSS)</h3><p>Context-aware payloads, validation bypasses, DOM sinks.</p></div>
-          <span class="chip mono">active</span>
-        </li>
-        <li class="reveal">
-          <span class="focus-rank mono" aria-hidden="true">F-04</span>
-          <div class="focus-main"><h3>API security</h3><p>Mass assignment, BOLA, authorization gaps between roles and versions.</p></div>
-          <span class="chip mono">active</span>
-        </li>
-        <li class="reveal">
-          <span class="focus-rank mono" aria-hidden="true">F-05</span>
-          <div class="focus-main"><h3>Discovery &amp; fuzzing</h3><p>Hidden endpoints, parameters and content — continuous, scripted, documented.</p></div>
-          <span class="chip mono">continuous</span>
-        </li>
-      </ul>
-    </div>
-  </section>
+        <div class="skill-cloud" id="skillCloud">
+          <button class="skill" data-skill="web" aria-pressed="false">Web / OWASP</button>
+          <button class="skill" data-skill="auth" aria-pressed="false">Auth & Sessions</button>
+          <button class="skill" data-skill="api" aria-pressed="false">API Testing</button>
+          <button class="skill" data-skill="discovery" aria-pressed="false">Discovery & Fuzzing</button>
+          <button class="skill" data-skill="tooling" aria-pressed="false">Tools</button>
+          <button class="skill" data-skill="systems" aria-pressed="false">Systems</button>
+          <button class="skill" data-skill="reporting" aria-pressed="false">Reporting</button>
+        </div>
 
-  <!-- ============ 07 PROJECTS ============ -->
-  <section class="section" id="projects">
-    <div class="container">
-      <header class="sec-head reveal">
-        <span class="sec-index mono" aria-hidden="true">07</span>
+        <div class="grid cols-2" style="margin-top:12px" id="skillPanels">
+          <div class="card" data-group="web">
+            <h3>Web / AppSec</h3>
+            <div class="badges">
+              <span class="badge">IDOR / Broken Access Control</span>
+              <span class="badge">XSS</span>
+              <span class="badge">OWASP Top 10</span>
+              <span class="badge">SQLi</span>
+            </div>
+          </div>
+
+          <div class="card" data-group="auth">
+            <h3>Auth & Sessions</h3>
+            <div class="badges">
+              <span class="badge">Role checks</span>
+              <span class="badge">Session handling</span>
+              <span class="badge">Token testing</span>
+              <span class="badge">Bypass scenarios (labs)</span>
+            </div>
+          </div>
+
+          <div class="card" data-group="api">
+            <h3>API Testing</h3>
+            <div class="badges">
+              <span class="badge">Burp Repeater</span>
+              <span class="badge">Parameter testing</span>
+              <span class="badge">Auth headers</span>
+              <span class="badge">Endpoint validation</span>
+            </div>
+          </div>
+
+          <div class="card" data-group="discovery">
+            <h3>Discovery & Fuzzing</h3>
+            <div class="badges">
+              <span class="badge">FFUF</span>
+              <span class="badge">Gobuster</span>
+              <span class="badge">Directories</span>
+              <span class="badge">Dorks (recon)</span>
+            </div>
+          </div>
+
+          <div class="card" data-group="tooling">
+            <h3>Tools</h3>
+            <div class="badges">
+              <span class="badge">Burp Suite</span>
+              <span class="badge">Nmap</span>
+              <span class="badge">Wireshark (basic)</span>
+              <span class="badge">Metasploit</span>
+            </div>
+          </div>
+
+          <div class="card" data-group="systems">
+            <h3>Systems</h3>
+            <div class="badges">
+              <span class="badge">Linux fundamentals</span>
+              <span class="badge">Windows fundamentals</span>
+              <span class="badge">SMB enumeration</span>
+              <span class="badge">PowerShell (basics)</span>
+            </div>
+          </div>
+
+          <div class="card" data-group="reporting">
+            <h3>Reporting</h3>
+            <div class="badges">
+              <span class="badge">Repro steps</span>
+              <span class="badge">Impact</span>
+              <span class="badge">Remediation</span>
+              <span class="badge">Clear summaries</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CERTIFICATIONS -->
+      <section class="panel" id="certs">
+        <h2>Certifications & Learning</h2>
+        <p class="lead">Verified credentials and current learning track.</p>
+
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Certifications</h3>
+            <div class="cert-grid">
+              <div class="cert"><strong>eJPTv2 (INE Security)</strong><div class="cert-note">Certified — Oct 2025</div></div>
+
+              <div class="cert"><strong>Hack The Box Academy — CWES</strong><div class="cert-note">Web Penetration Tester Path — In progress (Target: Q2 2026)</div></div>
+
+              <div class="cert"><strong>PortSwigger — BSCP</strong><div class="cert-note">Burp Suite Certified Practitioner — In progress (Target: Q3 2026)</div></div>
+
+              <div class="cert"><strong>TryHackMe — Junior Penetration Tester</strong><div class="cert-note"><a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-IJ3DHUNH5M.pdf" target="_blank" rel="noopener">Certificate</a></div></div>
+
+              <div class="cert"><strong>TryHackMe — Cyber Advent 2024</strong><div class="cert-note"><a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-487WCWP38L.pdf" target="_blank" rel="noopener">Certificate</a></div></div>
+
+              <div class="cert"><strong>Hack4U — Linux Environment Customization</strong><div class="cert-note">Verify ID: 2834-6242-5500-3604</div></div>
+
+              <div class="cert"><strong>Hack4U — Linux and Bash</strong><div class="cert-note">Verify ID: 6110-3981-2104-2052</div></div>
+
+              <div class="cert"><strong>Udemy — Pentesting in Information Security</strong><div class="cert-note"><a href="https://www.udemy.com/certificate/UC-e40c7171-613b-4cf5-9317-59efc7b2c9a9/" target="_blank" rel="noopener">Verify</a></div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Learning notes</h3>
+            <table class="table">
+              <tr><th>Area</th><th>Notes</th></tr>
+              <tr><td>Burp Suite</td><td>Proxy workflow, Repeater testing, Intruder for controlled brute-force in labs</td></tr>
+              <tr><td>Web exploitation</td><td>Access control, XSS, auth/session testing, API validation</td></tr>
+              <tr><td>Discovery</td><td>Content discovery, parameter fuzzing, recon dorks</td></tr>
+              <tr><td>Automation</td><td>Python helpers for repetitive recon/testing steps</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3>Education</h3>
+          <table class="table">
+            <tr><th>Institution</th><th>Program</th><th>Timeline</th></tr>
+            <tr><td>Corporación Universitaria Iberoamericana</td><td>B.S. Systems Engineering (Virtual)</td><td>Expected Jun 2027</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="panel" id="projects">
         <h2>Projects</h2>
-        <span class="sec-line" aria-hidden="true"></span>
-      </header>
+        <p class="lead">Selected work. Pin your best repos on GitHub for maximum impact.</p>
 
-      <ul class="proj-grid">
-        <!-- Duplicado de "Burp Notes (API Testing)" eliminado: ahora aparece una sola vez -->
-        <li class="proj-card reveal">
-          <h3>Burp Notes — API Testing</h3>
-          <p>Methodology notes and checklists for testing REST APIs with Burp: recon, endpoint discovery, authorization matrices and ready-to-use Repeater payloads.</p>
-          <ul class="mono chips"><li>methodology</li><li>checklist</li><li>burp</li></ul>
-          <!-- TODO: reemplaza por la URL real del repo -->
-          <a class="proj-link mono" href="https://github.com/Philosopher-Man?tab=repositories" target="_blank" rel="noopener">view on GitHub ↗</a>
-        </li>
+        <div class="grid cols-3" id="projectGrid">
 
-        <li class="proj-card reveal">
-          <h3>BoreasFuzz</h3>
-          <p>Lightweight fuzzing helper for content discovery: custom wordlists, recursion control and clean CLI output for quick triage.</p>
-          <ul class="mono chips"><li>python</li><li>fuzzing</li><li>recon</li></ul>
-          <!-- TODO: reemplaza por la URL real del repo -->
-          <a class="proj-link mono" href="https://github.com/Philosopher-Man?tab=repositories" target="_blank" rel="noopener">view on GitHub ↗</a>
-        </li>
-
-        <li class="proj-card reveal">
-          <h3>Report Templates</h3>
-          <p>Reusable pentest report templates (technical + executive) with severity ratings, evidence sections and remediation guidance.</p>
-          <ul class="mono chips"><li>reporting</li><li>cvss</li></ul>
-          <!-- TODO: reemplaza por la URL real del repo -->
-          <a class="proj-link mono" href="https://github.com/Philosopher-Man?tab=repositories" target="_blank" rel="noopener">view on GitHub ↗</a>
-        </li>
-
-        <li class="proj-card reveal">
-          <h3>Recon &amp; Fuzzing Helpers</h3>
-          <p>Small Bash/Python scripts that glue common recon tools together and normalize their output.</p>
-          <ul class="mono chips"><li>bash</li><li>python</li><li>automation</li></ul>
-          <!-- TODO: reemplaza por la URL real del repo -->
-          <a class="proj-link mono" href="https://github.com/Philosopher-Man?tab=repositories" target="_blank" rel="noopener">view on GitHub ↗</a>
-        </li>
-
-        <li class="proj-card reveal">
-          <h3>Basic Port Scanning</h3>
-          <p>Beginner-friendly scanning walkthrough and scripts: service enumeration with Nmap and how to document the results.</p>
-          <ul class="mono chips"><li>nmap</li><li>recon</li></ul>
-          <!-- TODO: reemplaza por la URL real del repo -->
-          <a class="proj-link mono" href="https://github.com/Philosopher-Man?tab=repositories" target="_blank" rel="noopener">view on GitHub ↗</a>
-        </li>
-      </ul>
+  <div class="card" data-tags="reporting web appsec">
+    <h3>Report Templates (Web)</h3>
+    <p>Consulting-style Markdown templates: executive summary, reproducible steps, impact/severity, and remediation. Includes a safe example (IDOR) and “Prepared by Oscar Escalante” branding.</p>
+    <div class="tags">
+      <span class="tag">Reporting</span><span class="tag">Web</span><span class="tag">AppSec</span>
     </div>
-  </section>
-
-  <!-- ============ 08 CONTACT ============ -->
-  <section class="section" id="contact">
-    <div class="container">
-      <header class="sec-head reveal">
-        <span class="sec-index mono" aria-hidden="true">08</span>
-        <h2>Contact</h2>
-        <span class="sec-line" aria-hidden="true"></span>
-      </header>
-
-      <div class="contact-box brackets reveal">
-        <h3>Open a channel</h3>
-        <p>Whether it's a junior AppSec role, a CTF team, or feedback on my notes and write-ups — my inbox is open.</p>
-        <div class="contact-actions">
-          <!-- TODO: sustituye el email de ejemplo por el tuyo (también en el mailto) -->
-          <button class="btn btn-primary" type="button" data-copy="you@example.com">Copy email</button>
-          <a class="btn btn-ghost" href="mailto:you@example.com">Write email</a>
-          <a class="btn btn-ghost" href="https://github.com/Philosopher-Man" target="_blank" rel="noopener">GitHub ↗</a>
-          <!-- TODO: sustituye por tu usuario real de LinkedIn -->
-          <a class="btn btn-ghost" href="https://www.linkedin.com/in/tu-usuario" target="_blank" rel="noopener">LinkedIn ↗</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p class="legal-note footer-legal">
-      <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.5v5.2c0 4.6-3 8-7 10.3-4-2.3-7-5.7-7-10.3V5.5z"/><path d="m9 11.5 2.2 2.2 4.3-4.2"/></svg>
-      All testing shown was performed in authorized, controlled environments.
-    </p>
-    <p class="mono footer-meta">© <span id="year"></span> Oscar Escalante · no cookies · no trackers · <a href="https://github.com/Philosopher-Man/Philosopher-Man.github.io" target="_blank" rel="noopener">view source</a></p>
+    <a class="btn" href="https://github.com/Philosopher-Man/web-pentest-report-templates" target="_blank" rel="noopener">View on GitHub</a>
   </div>
-</footer>
 
-<div id="toast" class="toast mono" role="status" aria-live="polite"></div>
-<script src="script.js" defer></script>
+  <div class="card" data-tags="burp api appsec">
+    <h3>Burp Notes (API Testing)</h3>
+    <p>Practical notes + checklists for API testing in Burp: endpoint mapping, auth/session testing, access control (IDOR patterns), and clean PoC documentation (authorized testing only).</p>
+    <div class="tags">
+      <span class="tag">Burp</span><span class="tag">API</span><span class="tag">Web</span>
+    </div>
+    <a class="btn" href="https://github.com/Philosopher-Man/burp-api-testing-notes" target="_blank" rel="noopener">View on GitHub</a>
+  </div>
+
+  <div class="card" data-tags="python fuzzing automation">
+    <h3>BoreasFuzz</h3>
+    <p>Fuzzing/recon helpers to speed up discovery and testing workflows (wordlists, endpoint collection helpers, basic automation). Built for learning + authorized use.</p>
+    <div class="tags">
+      <span class="tag">Python</span><span class="tag">Fuzzing</span><span class="tag">Automation</span>
+    </div>
+    <a class="btn" href="https://github.com/Philosopher-Man/BoreasFuzz" target="_blank" rel="noopener">View on GitHub</a>
+  </div>
+
+  <div class="card" data-tags="network nmap scanning">
+    <h3>Basic Port Scanning</h3>
+    <p>Simple port scanning project to support service discovery and structured enumeration practice (Nmap/ports basics + workflow).</p>
+    <div class="tags">
+      <span class="tag">Network</span><span class="tag">Scanning</span><span class="tag">Basics</span>
+    </div>
+    <a class="btn" href="https://github.com/Philosopher-Man/basic-port-scanning" target="_blank" rel="noopener">View on GitHub</a>
+  </div>
+
+</div>
+
+          <div class="card" data-tags="python recon automation">
+            <h3>Recon / Fuzzing Helpers</h3>
+            <p>Small Python/Bash utilities to streamline endpoint collection, parsing, and fuzzing workflows.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Recon</span><span class="tag">Automation</span></div>
+            <a class="btn" href="https://github.com/Philosopher-Man" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+
+          <div class="card" data-tags="burp api web">
+            <h3>Burp Notes (API Testing)</h3>
+            <p>Practical notes on testing APIs: auth headers, parameters, role checks, and PoC documentation.</p>
+            <div class="tags"><span class="tag">Burp</span><span class="tag">API</span><span class="tag">Web</span></div>
+            <a class="btn" href="https://github.com/Philosopher-Man" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="panel" id="contact">
+        <h2>Contact</h2>
+        <p class="lead">Send a short brief. I respond quickly.</p>
+
+        <form class="form" action="https://formsubmit.co/oscardavidescalante2019@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New inquiry from portfolio" />
+          <input type="text" name="_honey" style="display:none" />
+          <input type="hidden" name="_captcha" value="false" />
+
+          <div class="i"><label>Name</label><input name="name" required placeholder="Your name" /></div>
+          <div class="i"><label>Email</label><input name="email" type="email" required placeholder="you@company.com" /></div>
+
+          <div class="i">
+            <label>Service</label>
+            <select name="service" required>
+              <option value="Web App Testing">Web App Testing</option>
+              <option value="AppSec Support">AppSec Support</option>
+              <option value="Reporting / Re-test">Reporting / Re-test</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="i"><label>Message</label><textarea name="message" rows="6" placeholder="Scope, timelines, constraints"></textarea></div>
+          <button class="btn primary" type="submit">Send</button>
+          <a class="btn" href="mailto:oscardavidescalante2019@gmail.com">Email instead</a>
+        </form>
+      </section>
+
+      <!-- DOWNLOADS -->
+      <section class="panel" id="downloads">
+        <h2>Downloads</h2>
+        <p class="lead">CV and sample assets for quick internal sharing.</p>
+
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Resume</h3>
+            <p>One-page resume optimized for hiring managers.</p>
+            <a class="btn primary" href="assets/CVOscar.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+          </div>
+
+          <div class="card">
+            <h3>Sample Report</h3>
+            <p>Redacted sample report structure with executive summary and remediation plan.</p>
+            <a class="btn" href="assets/report-sample.pdf" target="_blank" rel="noopener">Download sample</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+</div>
+
+<script src="index.js"></script>
 </body>
 </html>
