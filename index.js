@@ -1,270 +1,284 @@
 /* ══════════════════════════════════════════════════
    index.js — Oscar Escalante · Portfolio
-   Índice:
-   00. Helpers            05. Terminal del hero
-   01. Año footer         06. Reveal on scroll
-   02. Scroll: header + barra progreso   07. Scrollspy
-   03. Título de pestaña animado         08. Menú móvil
-   04. Lluvia digital (canvas)           09. Toast + easter egg
+   Cada módulo es independiente (try/catch): si uno
+   falla, el resto de la página sigue funcionando.
    ══════════════════════════════════════════════════ */
 
-/* ═══ 00. HELPERS ═══ */
 const $  = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const safe = fn => { try { fn(); } catch (e) { console.warn('[fx]', e); } };
 
-/* ═══ 01. AÑO DEL FOOTER ═══ */
-const yearEl = $('#year');
-if (yearEl) yearEl.textContent = new Date().getFullYear();
+/* ═══ 01 · Año del footer ═══ */
+safe(() => {
+  const y = $('#year');
+  if (y) y.textContent = new Date().getFullYear();
+});
 
-/* ═══ 02. SCROLL: HEADER + BARRA DE PROGRESO ═══ */
-const header = $('#site-header');
-const bar    = $('#progress-bar');
-function onScroll(){
-  header?.classList.toggle('scrolled', scrollY > 8);
-  if (bar){
-    const max = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+/* ═══ 02 · Header + barra de progreso de scroll ═══ */
+safe(() => {
+  const header = $('#site-header');
+  const bar = $('#progress-bar');
+  const onScroll = () => {
+    header?.classList.toggle('scrolled', scrollY > 8);
+    if (bar){
+      const max = document.documentElement.scrollHeight - innerHeight;
+      bar.style.transform = `scaleX(${max > 0 ? (scrollY / max) : 0})`;
+    }
+  };
+  onScroll();
+  addEventListener('scroll', onScroll, { passive: true });
+});
+
+/* ═══ 03 · Título de pestaña (marquee simple, sin caracteres raros) ═══ */
+safe(() => {
+  if (REDUCE) return;
+  const BASE = document.title;
+  const SPIN = BASE + '   ·   ';
+  let i = 0;
+  let timer = setInterval(step, 280);
+  function step(){
+    document.title = SPIN.slice(i) + SPIN.slice(0, i);
+    i = (i + 1) % SPIN.length;
   }
-}
-onScroll();
-addEventListener('scroll', onScroll, { passive: true });
-
-/* ═══ 03. TÍTULO DE PESTAÑA ANIMADO (marquee) ═══ */
-const BASE_TITLE = document.title;
-const MARQUEE  = '  ⌈ ' + BASE_TITLE + ' ⌋  ';
-let mi = 0, titleTimer = null;
-
-function startMarquee(){
-  stopMarquee();
-  titleTimer = setInterval(() => {
-    document.title = MARQUEE.slice(mi) + MARQUEE.slice(0, mi);
-    mi = (mi + 1) % MARQUEE.length;
-  }, 220);
-}
-function stopMarquee(){ if (titleTimer){ clearInterval(titleTimer); titleTimer = null; } }
-
-if (!REDUCE){
-  startMarquee();
-  // Al cambiar de pestaña: mensaje de "hacker" + favicon avatar
   document.addEventListener('visibilitychange', () => {
     if (document.hidden){
-      stopMarquee();
-      document.title = '⚠ ACCESS GRANTED... come back';
-    } else {
-      startMarquee();
+      clearInterval(timer); timer = null;
+      document.title = '· session paused — Oscar Escalante';
+    } else if (!timer){
+      document.title = BASE;
+      timer = setInterval(step, 280);
     }
   });
-}
+});
 
-/* ═══ 04. LLUVIA DIGITAL (canvas, estilo hacker sutil) ═══ */
-const canvas = $('#rain');
-if (canvas && !REDUCE){
-  const ctx    = canvas.getContext('2d');
-  const CHARS  = 'アイウエオカキクケコサシスセソ01<>#$%&{}=+*';
-  const FONT   = 14;
+/* ═══ 04 · Lluvia digital (canvas) ═══ */
+safe(() => {
+  const canvas = $('#rain');
+  if (!canvas || REDUCE) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  const CHARS = 'アイウエオカキクケコサシスセソ01<>#$%&{}=+*';
+  const FONT = 14;
   let w, h, cols, drops, last = 0;
 
   function resize(){
     w = canvas.width  = innerWidth;
     h = canvas.height = innerHeight;
-    cols  = Math.floor(w / FONT);
+    cols = Math.max(1, Math.floor(w / FONT));
     drops = Array.from({ length: cols }, () => Math.random() * -80);
-    ctx.fillStyle = '#0a0d12';
-    ctx.fillRect(0, 0, w, h);
   }
   resize();
   addEventListener('resize', resize);
 
   (function draw(t){
     requestAnimationFrame(draw);
-    if (t - last < 55) return;          // ~18 fps: suficiente y ligero
+    if (t - last < 55) return;              // ~18 fps, ligero
     last = t;
-
     const hype = document.body.classList.contains('access-granted');
-    ctx.fillStyle = 'rgba(10,13,18,.14)';               // estela
+    ctx.fillStyle = 'rgba(10,13,18,.14)';
     ctx.fillRect(0, 0, w, h);
     ctx.font = FONT + 'px monospace';
-
     for (let i = 0; i < cols; i++){
       const ch = CHARS[Math.random() * CHARS.length | 0];
       ctx.fillStyle = Math.random() < .05
-        ? 'rgba(190,255,242,.9)'                        // cabeza brillante
+        ? 'rgba(190,255,242,.9)'
         : hype ? 'rgba(63,224,200,.9)' : 'rgba(63,224,200,.5)';
       ctx.fillText(ch, i * FONT, drops[i] * FONT);
       if (drops[i] * FONT > h && Math.random() > .975) drops[i] = 0;
       drops[i]++;
     }
   })(0);
-}
+});
 
-/* ═══ 05. TERMINAL DEL HERO: escribe comandos en bucle ═══ */
-const termOut = $('#term-out');
-const TERM_SCRIPT = [
-  { cmd: 'whoami',
-    out: ['<span class="t-ok">ethical_hacker</span> · web & api security'] },
-  { cmd: 'cat mission.txt',
-    out: ['&gt; current: Ethical Hacker @ NTT DATA',
-          '&gt; since: feb 2026 — hunting logic flaws'] },
-  { cmd: 'ls skills/',
-    out: ['burp-suite/  python/  owasp-top10/',
-          'idor/  xss/  apis/  reporting/'] },
-  { cmd: './scan --targets',
-    out: ['[OK] web apps   [OK] apis   [OK] auth flows',
-          '[**] all targets authorized · labs & engagements'] }
-];
+/* ═══ 05 · Terminal del hero
+   El HTML ya trae el contenido estático: si no hay JS o hay
+   reduced-motion, la terminal NUNCA se ve vacía ni rota. ═══ */
+safe(() => {
+  const out = $('#term-out');
+  if (!out || REDUCE) return;
 
-if (termOut){
-  if (REDUCE){
-    // Sin movimiento: volcado estático completo
-    termOut.innerHTML = TERM_SCRIPT.map(b =>
-      `<span class="t-p">oscar@ntt-data:~$</span> <span class="t-cmd">${b.cmd}</span>\n` +
-      b.out.join('\n')
-    ).join('\n\n');
-  } else {
-    let block = 0;
-    const PROMPT = '<span class="t-p">oscar@ntt-data:~$</span> ';
+  const BLOCKS = [
+    { cmd: 'whoami',
+      out: ['<span class="t-ok">oscar escalante — ethical hacker</span>'] },
+    { cmd: 'cat focus.txt',
+      out: ['web security testing · OWASP WSTG',
+            'DAST analysis · risk assessment',
+            'reporting with evidence &amp; mitigation'] },
+    { cmd: 'ls tools/',
+      out: ['burp-suite/  nmap/  wireshark/  metasploit/',
+            'ffuf/  gobuster/  python/  bash/'] },
+    { cmd: './status',
+      out: ['<span class="t-ok">[ok]</span> eJPTv2',
+            '<span class="t-ok">[~~]</span> CWES (HTB) · BSCP (PortSwigger)',
+            '<span class="t-ok">[+]</span> tryhackme top 5% — practice on'] }
+  ];
+  const PROMPT = '<span class="t-p">oscar@lab:~$</span> ';
+  let bi = 0;
 
-    function typeCommand(cmd, done){
-      let i = 0;
-      termOut.innerHTML += PROMPT;
-      (function tick(){
-        termOut.innerHTML = termOut.innerHTML.replace(/<span class="t-cmd">.*<\/span>$/, '') +
-          `<span class="t-cmd">${cmd.slice(0, ++i)}</span>`;
-        if (i < cmd.length) setTimeout(tick, 34 + Math.random() * 40);
-        else done();
-      })();
-    }
-    function printOut(lines, done){
+  function typeCmd(cmd, cb){
+    const line = document.createElement('span');
+    line.innerHTML = PROMPT;
+    const c = document.createElement('span');
+    c.className = 't-cmd';
+    line.appendChild(c);
+    out.appendChild(line);
+    let i = 0;
+    (function tick(){
+      c.textContent = cmd.slice(0, ++i);
+      if (i < cmd.length) setTimeout(tick, 30 + Math.random() * 45);
+      else cb();
+    })();
+  }
+  function addOut(html, cb){
+    out.insertAdjacentHTML('beforeend', '\n' + html);
+    setTimeout(cb, 130);
+  }
+  function runBlock(){
+    out.textContent = '';
+    const b = BLOCKS[bi];
+    typeCmd(b.cmd, () => {
       let i = 0;
       (function next(){
-        if (i < lines.length){
-          termOut.innerHTML += '\n' + lines[i++];
-          setTimeout(next, 130);
-        } else { termOut.innerHTML += '\n'; done(); }
+        if (i < b.out.length) addOut(b.out[i++], next);
+        else { bi = (bi + 1) % BLOCKS.length; setTimeout(runBlock, 2100); }
       })();
-    }
-    function runBlock(){
-      termOut.innerHTML = '';
-      const b = TERM_SCRIPT[block];
-      typeCommand(b.cmd, () => printOut(b.out, () => {
-        block = (block + 1) % TERM_SCRIPT.length;
-        setTimeout(runBlock, 1700);
-      }));
-    }
-    runBlock();
+    });
   }
-}
+  setTimeout(runBlock, 900);
+});
 
-/* ═══ 06. REVEAL ON SCROLL ═══ */
-if (!REDUCE && 'IntersectionObserver' in window){
+/* ═══ 06 · Reveal on scroll ═══ */
+safe(() => {
+  const els = $$('.reveal');
+  if (REDUCE || !('IntersectionObserver' in window)){
+    els.forEach(el => el.classList.add('in'));
+    return;
+  }
   const ro = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if (en.isIntersecting){ en.target.classList.add('in'); ro.unobserve(en.target); }
     });
   }, { threshold: .08 });
-  $$('.reveal').forEach(el => ro.observe(el));
-} else {
-  $$('.reveal').forEach(el => el.classList.add('in'));
-}
+  els.forEach(el => ro.observe(el));
+});
 
-/* Efecto "decode" del nombre: se descifra solo al cargar */
-const nameEl = $('[data-decode]');
-if (nameEl && !REDUCE){
-  const target  = nameEl.dataset.decode;
-  const GLYPHS  = '!<>-_\\/[]{}=+*^?#01';
+/* ═══ 07 · Decode del nombre ═══ */
+safe(() => {
+  const el = $('[data-decode]');
+  if (!el || REDUCE) return;
+  const target = el.dataset.decode;
+  const GLYPHS = '!<>-_\\/[]{}=+*^?#01';
   let frame = 0;
   const TOTAL = 26;
   (function tick(){
     frame++;
     const p = frame / TOTAL;
-    let out = '';
+    let s = '';
     for (let i = 0; i < target.length; i++){
-      out += (p >= i / target.length + .25) ? target[i]
-           : target[i] === ' ' ? ' '
-           : GLYPHS[Math.random() * GLYPHS.length | 0];
+      s += (p >= i / target.length + .25) ? target[i]
+         : target[i] === ' ' ? ' '
+         : GLYPHS[Math.random() * GLYPHS.length | 0];
     }
-    nameEl.textContent = out;
+    el.textContent = s;
     if (frame < TOTAL) setTimeout(tick, 34);
-    else nameEl.textContent = target;
+    else el.textContent = target;
   })();
-}
+});
 
-/* Rol rotativo con máquina de escribir */
-const typedEl = $('#typed');
-const ROLES = [
-  'Ethical Hacker @ NTT DATA',
-  'Web Pentester',
-  'Bug Hunter',
-  'AppSec · OWASP Top 10'
-];
-if (typedEl && !REDUCE){
-  let ri = 0, ci = 0, deleting = false;
+/* ═══ 08 · Línea rotativa (qué hace, sin humo) ═══ */
+safe(() => {
+  const el = $('#typed');
+  if (!el || REDUCE) return;
+  const ROLES = [
+    'web security testing · OWASP WSTG',
+    'DAST & risk assessment',
+    'access control · IDOR · APIs',
+    'clear reporting, evidence-first'
+  ];
+  let ri = 0, ci = 0, del = false;
   (function type(){
     const word = ROLES[ri];
-    ci += deleting ? -1 : 1;
-    typedEl.textContent = word.slice(0, ci);
-    let delay = deleting ? 38 : 72;
-    if (!deleting && ci === word.length){ deleting = true; delay = 1900; }
-    else if (deleting && ci === 0){ deleting = false; ri = (ri + 1) % ROLES.length; delay = 420; }
-    setTimeout(type, delay);
+    ci += del ? -1 : 1;
+    el.textContent = word.slice(0, ci);
+    let d = del ? 34 : 66;
+    if (!del && ci === word.length){ del = true; d = 2000; }
+    else if (del && ci === 0){ del = false; ri = (ri + 1) % ROLES.length; d = 400; }
+    setTimeout(type, d);
   })();
-}
+});
 
-/* ═══ 07. SCROLLSPY: link activo en el nav ═══ */
-const navLinks = $$('.nav-menu a[href^="#"]');
-const linkById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
-if ('IntersectionObserver' in window){
+/* ═══ 09 · Scrollspy ═══ */
+safe(() => {
+  const links = $$('.nav-menu a[href^="#"]');
+  const byId = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  if (!('IntersectionObserver' in window)) return;
   const spy = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if (en.isIntersecting){
-        navLinks.forEach(a => a.classList.remove('active'));
-        linkById.get(en.target.id)?.classList.add('active');
+        links.forEach(a => a.classList.remove('active'));
+        byId.get(en.target.id)?.classList.add('active');
       }
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   $$('main section[id]').forEach(s => spy.observe(s));
-}
+});
 
-/* ═══ 08. MENÚ MÓVIL ═══ */
-const toggleBtn = $('.nav-toggle');
-const menu = $('#nav-menu');
-function setMenu(open){
-  if (!toggleBtn || !menu) return;
-  toggleBtn.setAttribute('aria-expanded', String(open));
-  toggleBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  menu.classList.toggle('open', open);
-}
-toggleBtn?.addEventListener('click', () =>
-  setMenu(toggleBtn.getAttribute('aria-expanded') !== 'true'));
- $$('.nav-menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+/* ═══ 10 · Menú móvil ═══ */
+safe(() => {
+  const btn = $('.nav-toggle'), menu = $('#nav-menu');
+  if (!btn || !menu) return;
+  const set = open => {
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.classList.toggle('open', open);
+  };
+  btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  $$('.nav-menu a').forEach(a => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+});
 
-/* ═══ 09. TOAST + COPIAR EMAIL + EASTER EGG ═══ */
-const toastEl = $('#toast');
-let toastTimer;
-function toast(msg){
-  if (!toastEl) return alert(msg);
-  toastEl.textContent = msg;
-  toastEl.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2600);
-}
+/* ═══ 11 · Toast + copiar email ═══ */
+safe(() => {
+  const toastEl = $('#toast');
+  let tt;
+  const toast = msg => {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(tt);
+    tt = setTimeout(() => toastEl.classList.remove('show'), 2600);
+  };
+  $$('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
+    const val = btn.dataset.copy;
+    try { await navigator.clipboard.writeText(val); toast('Email copied ✓'); }
+    catch {
+      const ta = document.createElement('textarea');
+      ta.value = val; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); toast('Email copied ✓'); }
+      catch { toast('Email: ' + val); }
+      ta.remove();
+    }
+  }));
+});
 
- $$('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(btn.dataset.copy); toast('Email copied ✓'); }
-  catch { toast('Email: ' + btn.dataset.copy); }
-}));
-
-/* Easter egg: Konami code (↑↑↓↓←→←→BA) → modo "ACCESS GRANTED" */
-const SEQ = ['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
-let ki = 0;
-addEventListener('keydown', e => {
-  const k = e.key.toLowerCase();
-  ki = (k === SEQ[ki]) ? ki + 1 : (k === SEQ[0] ? 1 : 0);
-  if (ki === SEQ.length){
-    ki = 0;
-    const on = document.body.classList.toggle('access-granted');
-    toast(on ? 'ACCESS GRANTED — welcome, hacker.' : 'Access revoked.');
-  }
+/* ═══ 12 · Easter egg: Konami code (↑↑↓↓←→←→BA) ═══ */
+safe(() => {
+  const SEQ = ['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
+  let ki = 0;
+  addEventListener('keydown', e => {
+    const k = (e.key || '').toLowerCase();
+    ki = (k === SEQ[ki]) ? ki + 1 : (k === SEQ[0] ? 1 : 0);
+    if (ki === SEQ.length){
+      ki = 0;
+      const on = document.body.classList.toggle('access-granted');
+      const t = $('#toast');
+      if (t){
+        t.textContent = on ? 'ACCESS GRANTED — practice mode' : 'session restored';
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2600);
+      }
+    }
+  });
 });
