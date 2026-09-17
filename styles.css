@@ -290,3 +290,7 @@ html.js .reveal.in{opacity:1;transform:none}
   .rain{display:none}
   .glitch::before,.glitch::after{display:none}
 }
+
+/* ── Añadido: varios enlaces en una tarjeta de proyecto ── */
+.proj-links{display:flex;gap:1.2rem;margin-top:1.1rem;flex-wrap:wrap}
+.proj-links .proj-link{margin-top:0}
